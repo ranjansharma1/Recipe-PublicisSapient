@@ -37,5 +37,4 @@ This project is a Recipe Management Web Application developed as part of an assi
 2. API documentation available at: http://localhost:8080/swagger-ui/index.html
 
 ### **Database:**
-```bash
-Check http://localhost:8080/h2-console to view data
+  Check http://localhost:8080/h2-console to view data
