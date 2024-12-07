@@ -19,30 +19,9 @@ import java.util.List;
 @Service
 public class RecipeService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RecipeService.class);
-//    private static final String API_URL="https://dummyjson.com/recipes";
-
-    @Value("${RECIPE_API_URL}")
-    String api_url;
-
+	
     @Autowired
     RecipeRepository recipeRepository;
-    
-    @PostConstruct
-    public void init() {
-        loadRecipe();
-    }
-
-    @Transactional
-    public void loadRecipe(){
-    	LOGGER.info("Loading Recipe Data from {}", api_url);
-        RestTemplate restTemplate = new RestTemplate();
-        RecipeResponse response = restTemplate.getForObject(api_url, RecipeResponse.class);
-        if (response != null) {
-            List<Recipe> recipes = response.getRecipes();
-            recipeRepository.saveAll(recipes);
-        }
-        LOGGER.info("All Recipe Data loaded Successfully");
-    }
     
     @Transactional
     public Recipe getRecipeById(Long id) {

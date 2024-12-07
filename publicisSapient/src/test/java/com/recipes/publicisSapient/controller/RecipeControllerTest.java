@@ -1,5 +1,6 @@
 package com.recipes.publicisSapient.controller;
 
+import com.recipes.publicisSapient.Service.RecipeAPIService;
 import com.recipes.publicisSapient.Service.RecipeService;
 import com.recipes.publicisSapient.entity.Recipe;
 
@@ -28,7 +29,11 @@ public class RecipeControllerTest {
 
     @MockBean
     private RecipeService recipeService;
+    
+    @MockBean
+    private RecipeAPIService recipeAPIService;
 
+    
     private Recipe recipe;
 
     @BeforeEach
@@ -41,14 +46,14 @@ public class RecipeControllerTest {
 
     @Test
     public void testLoadAllRecipes() throws Exception {
-        doNothing().when(recipeService).loadRecipe();
+        doNothing().when(recipeAPIService).loadRecipe();
 
         mockMvc.perform(get("/recipe/save")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated())
                 .andExpect(content().string("Recipes Data Successfully saved to DB"));
 
-        verify(recipeService, times(1)).loadRecipe();
+        verify(recipeAPIService, times(1)).loadRecipe();
     }
 
     @Test

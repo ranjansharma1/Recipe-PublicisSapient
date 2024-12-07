@@ -1,5 +1,6 @@
 package com.recipes.publicisSapient.controller;
 
+import com.recipes.publicisSapient.Service.RecipeAPIService;
 import com.recipes.publicisSapient.Service.RecipeService;
 import com.recipes.publicisSapient.entity.Recipe;
 
@@ -28,11 +29,14 @@ public class RecipeController {
  
     @Autowired
     RecipeService recipeService;
+    
+    @Autowired
+    RecipeAPIService recipeAPIService;
 
     @GetMapping("/save")
     public ResponseEntity<String> loadAllRecipes(){
     	LOGGER.info("Loading recipes in DB");
-        recipeService.loadRecipe();
+    	recipeAPIService.loadRecipe();
         LOGGER.info("Recipes Data Loaded successfully to DB");
         return new ResponseEntity<String>("Recipes Data Successfully saved to DB", HttpStatus.CREATED);
     }
